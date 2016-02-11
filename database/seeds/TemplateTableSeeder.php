@@ -14,7 +14,20 @@ class TemplateTableSeeder extends Seeder
          DB::table('templates')->insert([
             'title' => 'Default README.md',
             'description' => 'A starter template for your README.md files',
-            'content' => '# Title',
+            'content' => '
+# Title
+## Subtitle
+
+```
+{CODE_BLOCK}
+```
+
+[Link](http://www.something.com)
+
+[Link](http://www.something.com)
+
+[Link](http://www.something.com)
+            ',
             'user_id' => 1
         ]);
     }
