@@ -1,0 +1,15 @@
+{
+  "name": "App",
+  "description": "Description",
+  "dependencies": {
+    "animate-css": "~3.5.0",
+    "fontawesome": "~4.5",
+    "jquery": "~1.11.3",
+    "bootstrap": "~3.3.6",
+    "bootstrap-select": "~1.9.4",
+    "bootswatch": "~3.3.6",
+    "EpicEditor": "~0.2.2",
+    "FileSaver": "master"
+  },
+  "private": true
+}
