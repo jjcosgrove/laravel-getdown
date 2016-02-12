@@ -18,6 +18,7 @@
     <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/EpicEditor/epiceditor/js/epiceditor.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/highlightjs/highlight.pack.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/FileSaver/FileSaver.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/script.min.js') }}"></script>
 </head>

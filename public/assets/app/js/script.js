@@ -1,7 +1,7 @@
 $(document).ready(function() {
     EnableBootstrapSelectPicker();
     EnableAutoCloseAlerts();
-    EnableEpicEditor();
+    EnableEpicEditors();
     EnableEpicEditorExport();
 });
 
@@ -44,19 +44,10 @@ function EnableAutoCloseAlerts() {
 /**
  * enable epiceditor - but only when there is one on the page to enable
  */
-function EnableEpicEditor() {
-    if ($('#epiceditor').length && $('#epiceditor').hasClass('readonly'))
-        EnableReadonlyEpicEditor();
-    else if ($('#epiceditor').length && !$('#epiceditor').hasClass('readonly'))
-        EnableEditableEpicEditor();
-}
+function EnableEpicEditors() {
 
-/**
- * for read-only mode epiceditors, as found on the 'view' page
- */
-function EnableReadonlyEpicEditor() {
-
-    var opts = {
+    var readonly = {
+        editable: false,
         container: 'epiceditor',
         textarea: 'epiceditor_textarea',
         basePath: '/assets/vendor/EpicEditor/epiceditor/',
@@ -93,57 +84,45 @@ function EnableReadonlyEpicEditor() {
         }
     };
 
-    //create and set to preview mode as readonly
-    var editor = new EpicEditor(opts).load();
-    editor.preview();
+    var editable = jQuery.extend(true, {}, readonly);
+    editable.editable = true;
+    editable.button.preview = true;
+    editable.button.fullscreen = true;
+    editable.button.bar = true;
 
-    EnableTabKey(editor);
-    EnableCustomEpicEditorCommands(editor);
+    var mode = $('#epiceditor').hasClass('readonly') ? readonly : editable;
+
+    $('#epiceditor').each(function() {
+        EnableEpicEditor(mode);
+    });
 }
 
-/**
- * for full editable mode, as found on the 'new' and 'edit' pages
- */
-function EnableEditableEpicEditor() {
+function EnableEpicEditor(mode) {
+    var previewer;
 
-    var opts = {
-        container: 'epiceditor',
-        textarea: 'epiceditor_textarea',
-        basePath: '/assets/vendor/EpicEditor/epiceditor/',
-        clientSideStorage: false,
-        useNativeFullscreen: true,
-        parser: marked,
-        file: {
-            name: 'epiceditor'
-        },
-        theme: {
-            base: 'themes/base/epiceditor.css',
-            preview: 'themes/preview/github.css',
-            editor: 'themes/editor/epic-light.css'
-        },
-        button: {
-            preview: true,
-            fullscreen: true,
-            bar: true
-        },
-        focusOnLoad: false,
-        shortcut: {
-            modifier: 18,
-            fullscreen: 70,
-            preview: 80
-        },
-        string: {
-            togglePreview: 'Toggle Preview Mode',
-            toggleEdit: 'Toggle Edit Mode',
-            toggleFullscreen: 'Enter Fullscreen'
-        },
-        autogrow: {
-            autogrow: true,
-            minHeight: 500
-        }
-    };
+    var editor = new EpicEditor(mode).load(function() {
+        previewer = this.getElement('previewer');
+        var cssTag = previewer.createElement('link');
 
-    var editor = new EpicEditor(opts).load();
+        cssTag.rel = 'stylesheet';
+        cssTag.type = 'text/css';
+        cssTag.href = '/assets/vendor/highlightjs/styles/github.css';
+
+        previewer.head.appendChild(cssTag);
+    });
+
+    editor.on('preview', function() {
+
+        var previewerBody = previewer.body;
+        var codeBlocks = previewerBody.getElementsByTagName('code');
+
+        $(codeBlocks).each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+
+    if (mode.editable === false)
+        editor.preview();
 
     EnableTabKey(editor);
     EnableCustomEpicEditorCommands(editor);

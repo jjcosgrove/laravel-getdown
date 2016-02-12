@@ -9,7 +9,8 @@
     "bootstrap-select": "~1.9.4",
     "bootswatch": "~3.3.6",
     "EpicEditor": "~0.2.2",
-    "FileSaver": "master"
+    "FileSaver": "master",
+    "highlightjs": "~9.1.0"
   },
   "private": true
 }

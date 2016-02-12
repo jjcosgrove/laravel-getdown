@@ -13,7 +13,8 @@
                     <ul>
                         <li>Basic accounts</li>
                         <li>Templates/New from template</li>
-                        <li>Live edit/previewof Markdown</li>
+                        <li>Live edit/preview of Markdown</li>
+                        <li>Syntax highlighting</li>
                         <li>Fullscreen mode</li>
                     </ul>
                     <p><strong>Future features may include:</strong></p>
