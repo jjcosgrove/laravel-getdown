@@ -100,7 +100,11 @@ function EnableEpicEditors() {
 function EnableEpicEditor(mode) {
     var previewer;
 
-    var editor = new EpicEditor(mode).load(function() {
+    //create the base editor
+    var editor = new EpicEditor(mode);
+
+    //event handler
+    editor.on('load', function() {
         previewer = this.getElement('previewer');
         var cssTag = previewer.createElement('link');
 
@@ -109,10 +113,17 @@ function EnableEpicEditor(mode) {
         cssTag.href = '/assets/vendor/highlightjs/styles/github.css';
 
         previewer.head.appendChild(cssTag);
+
+        if (mode.editable === false) {
+
+            //switch to preview mode if in readonly mode.
+            this.preview();
+        }
     });
 
+    //add syntax highlighting anytime we switch to preview mode
     editor.on('preview', function() {
-
+        previewer = this.getElement('previewer');
         var previewerBody = previewer.body;
         var codeBlocks = previewerBody.getElementsByTagName('code');
 
@@ -121,8 +132,8 @@ function EnableEpicEditor(mode) {
         });
     });
 
-    if (mode.editable === false)
-        editor.preview();
+    //go ahead and load the editor
+    editor.load();
 
     EnableTabKey(editor);
     EnableCustomEpicEditorCommands(editor);

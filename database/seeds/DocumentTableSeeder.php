@@ -87,6 +87,7 @@ Default user/password is: admin@localhost/password
 * Basic accounts
 * Templates/New from template
 * Live edit/preview of Markdown
+* Syntax highlighting
 * Fullscreen mode
 
 ## Todo
