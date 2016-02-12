@@ -3,6 +3,7 @@
 namespace GetDown\Http\Controllers\Auth;
 
 use GetDown\User;
+use GetDown\Preferences;
 use Validator;
 use GetDown\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -63,10 +64,18 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        //don't forget to assign default preferences
+        $preferences = Preferences::create([
+            'user_id' => $user->id,
+            'theme' => 'paper'
+        ]);
+
+        return $user;
     }
 }
