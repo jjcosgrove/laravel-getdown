@@ -44,8 +44,23 @@
 .document .description {
     margin-bottom:0;
 }
+#search {
+    padding-top: 17.5px;
+    padding-bottom: 0;
+    outline: none;
+}
+.document.no-results {
+    display: block !important;
+}
 
 /* new document */
 .controls .btn{
     min-width: 100px;
+}
+
+@media only screen and (max-width: 992px) {
+    #search {
+        width: 100%;
+        padding: 20px;
+    }
 }

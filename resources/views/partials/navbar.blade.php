@@ -15,6 +15,10 @@
                     <li><a href="{{ URL('/login') }}">Login</a></li>
                     <li><a href="{{ URL('/register') }}">Register</a></li>
                 @else
+                    @if(in_array(basename(Request::url()),array('documents','templates')))
+                        <li><input id="search" class="hidden animated fadeIn" name="search" placeholder="Search..." type="text" data-list=".documents" autcomplete="off"></li>
+                        <li><a class="search-toggle" href="#"><i class="fa fa fa-search"></i></a></li>
+                    @endif
                     <li><a href="{{ Route('templates') }}">Templates</a></li>
                     <li><a href="{{ Route('documents') }}">Documents</a></li>
                     <li class="dropdown">

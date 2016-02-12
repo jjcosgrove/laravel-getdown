@@ -12,15 +12,15 @@
                     <p><strong>Current features include:</strong></p>
                     <ul>
                         <li>Basic accounts</li>
-                        <li>Templates/New from template</li>
-                        <li>Live edit/preview of Markdown</li>
-                        <li>Syntax highlighting</li>
                         <li>Fullscreen mode</li>
+                        <li>Live edit/preview of Markdown</li>
+                        <li>Templates/New from template</li>
+                        <li>Searchable listings</li>
+                        <li>Syntax highlighting</li>
                     </ul>
                     <p><strong>Future features may include:</strong></p>
                     <ul>
                         <li>Tidy up/refactor</li>
-                        <li>Fully searchable documents</li>
                         <li>Tag support</li>
                         <li>Lots more</li>
                     </ul>

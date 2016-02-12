@@ -3,6 +3,7 @@ $(document).ready(function() {
     EnableAutoCloseAlerts();
     EnableEpicEditors();
     EnableEpicEditorExport();
+    EnableSearch();
 });
 
 /**
@@ -97,6 +98,9 @@ function EnableEpicEditors() {
     });
 }
 
+/**
+ * actually enable the editor with appropriate options
+ */
 function EnableEpicEditor(mode) {
     var previewer;
 
@@ -140,6 +144,31 @@ function EnableEpicEditor(mode) {
 }
 
 /**
+ * add very noddy export support
+ */
+function EnableEpicEditorExport() {
+    $('.export').on('click', function() {
+        var blob = new Blob([$('textarea').val()], {
+            type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, "GetDown.md");
+    });
+}
+
+/**
+ * enable the search feature on documents/templates index pages
+ */
+function EnableSearch() {
+    $('.search-toggle').on('click', function() {
+        $('#search').toggleClass('hidden');
+    });
+    $('#search').hideseek({
+        nodata: 'Nothing found for your search...',
+        highlight: true
+    });
+}
+
+/**
  * event handler for the tab key. makes use of custom EE commands
  */
 function EnableTabKey(editor) {
@@ -166,18 +195,6 @@ function EnableCustomEpicEditorCommands(editor) {
         }
     };
     window.DefaultCommands = Commands;
-}
-
-/**
- * add very noddy export support
- */
-function EnableEpicEditorExport() {
-    $('.export').on('click', function() {
-        var blob = new Blob([$('textarea').val()], {
-            type: "text/plain;charset=utf-8"
-        });
-        saveAs(blob, "GetDown.md");
-    });
 }
 
 /*
